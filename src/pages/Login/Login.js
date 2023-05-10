@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const navigate = useNavigate();
-
+    
     const googleAuthLoginClickHandle = () => {
         window.location.href = "http://localhost:8080/oauth2/authorization/google";
     }
