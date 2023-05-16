@@ -12,6 +12,7 @@ const PostRegister = () => {
     const PostRegisterSubmit = useMutation(async() => {
         const formData = new FormData();
         formData.append("title", title);
+        formData.append("userId", principal.data.data.userId);
         formData.append("content", content);
         imgFiles.forEach(imgFile => {
             formData.append("imgFiles", imgFile.file);
@@ -27,8 +28,8 @@ const PostRegister = () => {
                 "Content-Type": "multipart/form-data"
             }
         }
-        // const response = await axios.get("http://localhost:8080/post/register", option);
-        // return response;
+        const response = await axios.post("http://localhost:8080/post/register", formData, option);
+        return response;
     });
 
     const principal = useQuery(["principal"], async () => {
@@ -66,6 +67,7 @@ const PostRegister = () => {
         }
 
         setImgFiles([...imgFiles, ...newImgFiles]);
+        e.target.value = null;
     }
 
     const removeFileHandle = (e) => {
